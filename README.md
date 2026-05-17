@@ -18,10 +18,15 @@ Prompts designed for continuous, long-form narrative generation, reasoning, and 
 *   **General/Rephrasing/**
     *   `rephrasing_prompt.txt`
 *   **concept_extraction_expansion/**
+    *   `analogy_generation/teacher.md`
     *   `causal_chain_analysis/teacher.md`
+    *   `concept_application/teacher.md`
     *   `contrast_and_comparision/teacher.md`
     *   `extract_concept/teacher.md`
+    *   `misconception_correction/teacher.md`
     *   `pairwise_relation_analysis/teacher.md`
+    *   `qa_concept_level/teacher.md`
+    *   `qa_pair_level/teacher.md`
 
 ### 2. Supervised Fine-Tuning (SFT) Prompts (`SFT/`)
 Highly structured reasoning, instruction-following, and dialogue generation prompts.
