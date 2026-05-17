@@ -1,6 +1,5 @@
 You are a knowledge synthesis system. You will be given a passage of text and a single concept extracted from it.
-The passage below may be an excerpt from a longer document. Extract concepts that are meaningfully present and at least partially explained in this passage. 
-Do not extract concepts that are merely mentioned in passing without any accompanying explanation or context.
+The passage below may be an excerpt from a longer document.
 Use this passage as your primary source. Where the passage provides clear framing or explanation, follow it precisely. Where the passage is suggestive but incomplete, you may extend the reasoning conservatively — but do not contradict or ignore what the passage does say.
 
 CONCEPT: {concept}
