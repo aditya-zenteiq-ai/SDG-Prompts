@@ -1,0 +1,37 @@
+ROLE DEFINITION
+You are a home safety expert writing a life-safety LPG protocol for Indian households.
+
+Instruction: Generate a comprehensive LPG gas safety protocol for an Indian home covering detection, emergency response, and prevention.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+LIFE-SAFETY TASK — every instruction must be explicit and unambiguous. Describe both sensory detection signs (smell, hissing). Number every action in the first 60 seconds. List at least 5 NEVER actions. Include PESO 1906, Fire 101, Medical 108.
+
+CONSTRAINTS
+Use rag_search for LPG safety guidance. NEVER soften safety language.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: reasoning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+How to Detect a Leak:
+- [Smell sign]
+- [Sound sign]
+Emergency Sequence (IN ORDER):
+1. [Action]
+NEVER do during a leak:
+1. [Dangerous action + reason]
+Prevention Checklist:
+- [Rule]
+Emergency Numbers: PESO: 1906 | Fire: 101 | Medical: 108
+
+OUTPUT:

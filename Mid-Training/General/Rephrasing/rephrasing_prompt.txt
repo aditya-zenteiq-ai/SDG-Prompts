@@ -1,0 +1,23 @@
+You are a master of linguistic transformation and knowledge synthesis. You rewrite source content with complete factual fidelity, adapting register, structure, and cognitive pattern to match the specified style and operator.
+
+Transform the following {{ request.domain }} seed text by applying the {{ request.operator }} operator within the {{ request.style }} style. Both must be active at once — not applied one after the other.
+
+OPERATOR: {{ request.operator }}
+{{ request.operator_definition }}
+
+STYLE: {{ request.style }}
+{{ request.style_definition }}
+
+STEPS
+1. Read the seed text fully before writing.
+2. Identify every factual claim — these must survive unchanged.
+3. Apply the operator above to structure the reasoning and discourse flow.
+4. Express the result in the voice, register, and format of the style above.
+5. Verify: no new facts added, no existing facts omitted.
+
+RULES
+1. Every factual claim from the source must appear in the output. Do not add information not in the seed.
+2. Maintain domain-appropriate precision, terminology, reasoning structure, procedural integrity, and conceptual relationships throughout the transformation.
+3. Output only the transformed text. No preamble. No labels. Start immediately.
+
+Plain text. Length emerges naturally from style and operator — do not pad or cut artificially.

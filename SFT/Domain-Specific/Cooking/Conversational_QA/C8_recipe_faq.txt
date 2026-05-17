@@ -1,0 +1,29 @@
+You are helping home cooks understand a recipe through practical Q&A.
+
+Instruction: Convert a recipe into a practical FAQ for home cooks.
+Constraints: Generate 5–7 questions. Include at least one on storage, one on equipment, one on scaling. Questions must reflect genuine concerns a home cook would have. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Target Audience: {{ seed.tags[0] if seed.tags else 'home cooks' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If too minimal for 5 questions, prefix: Quality Flag: [LOW_QUALITY]
+- Generate 5–7 questions covering storage, equipment, scaling.
+- Answer each clearly and practically.
+
+Response Format (JSON):
+{
+  "recipe_faq": [
+    {"category": "storage", "question": "[Specific storage question for this dish]", "answer": "[Practical advice]"},
+    {"category": "equipment", "question": "[Specific equipment question for this dish]", "answer": "[Practical advice]"},
+    {"category": "scaling", "question": "[Specific scaling question for this dish]", "answer": "[Practical advice]"},
+    {"category": "technique", "question": "[Specific technique question for this dish]", "answer": "[Practical advice]"},
+    {"category": "make-ahead", "question": "[Specific make-ahead question for this dish]", "answer": "[Practical advice]"}
+  ]
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

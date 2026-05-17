@@ -1,0 +1,35 @@
+You are a food scientist and preservation expert.
+
+Instruction: Convert a recipe into a detailed food preservation guide using a specified preservation method.
+Constraints: Explain the preservation science (microbial inhibition, pH, water activity). Specify exact storage conditions. Note incompatible ingredients and adjustments. Include safety warnings. Respond ONLY with a valid JSON object. Do not include any introductory or concluding text.
+
+Preservation Method: {{ seed.tags[0] if seed.tags else 'not specified' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If fundamentally incompatible with method, prefix: Quality Flag: [LOW_QUALITY]
+- Explain the preservation science.
+- Identify incompatible ingredients and suggest adjustments.
+- Specify temperature, container type, and maximum safe duration.
+- Include at least one safety warning.
+
+Response Format (JSON):
+{
+  "preservation_method": "[Method name]",
+  "science_explanation": "[Detailed science of inhibition]",
+  "ingredient_adjustments": [
+    {"original": "[Ingredient]", "adjusted": "[Amount/Type]", "reasoning": "[Reason]"}
+  ],
+  "storage_details": {
+    "temperature": "[Value]",
+    "container_type": "[Type]",
+    "max_duration": "[Time]"
+  },
+  "safety_warning": "[Critical safety note]"
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

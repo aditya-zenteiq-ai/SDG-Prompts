@@ -1,0 +1,39 @@
+ROLE DEFINITION
+You are a professional Home Inspector and maintenance planner.
+
+Instruction: Generate a seasonal preventive maintenance schedule for a home, organised by frequency and system.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Organise by: daily, weekly, monthly, quarterly, annual. Cover electrical, plumbing, HVAC, structural, pest/damp. Flag DIY vs professional. Include at least one Indian-climate task.
+
+CONSTRAINTS
+Cover all five systems: electrical, plumbing, HVAC, structural, pest/damp.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: planning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Daily:
+- [Task]
+Weekly:
+- [Task]
+Monthly:
+- [Task]
+Quarterly:
+- [Task] [DIY / Professional]
+Annual:
+- [Task] [DIY / Professional]
+Indian Climate Notes:
+- [Monsoon / Summer / Winter tasks]
+
+OUTPUT:

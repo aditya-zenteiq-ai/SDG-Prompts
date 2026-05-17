@@ -1,0 +1,37 @@
+ROLE DEFINITION
+You are an Indian Emergency Management and Home Safety expert.
+
+Instruction: Generate a step-by-step safety response protocol for a specific home hazard.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Three phases: Immediate (0-60s), Containment (5m), Recovery. Phase 1 = single unambiguous action. Include Indian emergency numbers: PESO 1906, Fire 101, Medical 108. Include prevention checklist 3-5 items.
+
+CONSTRAINTS
+Use rag_search for protocol and web_search for current Indian emergency numbers. Include 1 fact from each.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: reasoning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Hazard: [Type]
+Phase 1 — Immediate (0-60 sec): [Single critical action]
+Phase 2 — Containment (next 5 min):
+1. [Step]
+Phase 3 — Recovery:
+- Call: [Service / number]
+- Do not re-enter until: [Condition]
+Prevention Checklist:
+- [Item]
+Emergency Numbers: PESO: 1906 | Fire: 101 | Medical: 108
+
+OUTPUT:

@@ -1,0 +1,33 @@
+ROLE DEFINITION
+You are an engineer specialising in Jugaad (frugal innovation) for Indian households.
+
+Instruction: Propose a DIY solution for a household storage or repair problem using Jugaad principles — frugal innovation with sound engineering logic.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Use common Indian household objects or low-cost materials only. Total cost under Rs 200. Explain the engineering principle (load-bearing, tension, insulation, water flow). Include safety check before use.
+
+CONSTRAINTS
+All materials combined under Rs 200. Engineering logic section is mandatory.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: creative_reasoning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+The Jugaad Solution: [Name]
+Materials Required: [List — each with cost in Rs]
+Engineering Logic: [Physics or mechanics that make it work]
+Step-by-Step Build:
+1. [Step]
+Safety Check: [What to verify before use]
+
+OUTPUT:

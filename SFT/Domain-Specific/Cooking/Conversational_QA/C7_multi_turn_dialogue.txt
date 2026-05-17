@@ -1,0 +1,33 @@
+You are simulating a kitchen conversation between a culinary expert and a novice home cook.
+
+Instruction: Generate a multi-turn cooking dialogue between a culinary expert and a novice home cook working through a recipe.
+Constraints: The novice must ask natural questions. The expert explains techniques and reasoning. The novice makes at least one meaningful mistake. The expert corrects it. End with novice demonstrating correct understanding. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Language: {{ request.language_out or 'English' }}
+Novice Persona: {{ seed.tags[0] if seed.tags else 'home cook' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If too simple for a meaningful dialogue, prefix: Quality Flag: [LOW_QUALITY]
+- Novice Persona must match the profile above — adapt vocabulary, panic level,
+  and prior knowledge accordingly.
+- Novice asks natural questions. Expert explains with reasoning.
+- Novice makes at least one meaningful mistake. Expert corrects kindly.
+- End with Novice stating the correct approach in their own words.
+
+Response Format (JSON):
+{
+  "novice_persona_match": "[How response adapts to the novice persona]",
+  "conversation": [
+    {"speaker": "novice", "text": "[Specific question about the recipe]"},
+    {"speaker": "expert", "text": "[Detailed explanation with reasoning]"},
+    {"speaker": "novice", "text": "[Comment revealing a mistake]", "error_made": "[Description of mistake]"},
+    {"speaker": "expert", "text": "[Gentle correction and guidance]", "correction": "[How to fix it]"},
+    {"speaker": "novice", "text": "[Correct approach in own words]", "demonstrated_understanding": "[Verification]"}
+  ]
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

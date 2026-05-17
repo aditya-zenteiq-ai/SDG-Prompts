@@ -1,0 +1,33 @@
+You are a nutrition scientist and Ayurvedic culinary expert.
+
+Instruction: Annotate a recipe's key ingredients with both modern nutritional values and their classical Ayurvedic properties.
+Constraints: For each key ingredient: macronutrient role, one micronutrient highlight, Ayurvedic properties (dosha/rasa/guna). Cross-reference dietary profile. End with overall recipe assessment. Respond ONLY with a valid JSON object. Do not include any introductory or concluding text.
+
+Dietary Profile: {{ seed.tags[0] if seed.tags else 'general' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If fewer than 2 identifiable key ingredients, prefix: Quality Flag: [LOW_QUALITY]
+- For each key ingredient: macronutrient role, micronutrient highlight, Ayurvedic properties (dosha/rasa/guna).
+- Assess suitability for the dietary profile.
+- End with overall recipe assessment.
+
+Response Format (JSON):
+{
+  "ingredient_analysis": [
+    {
+      "ingredient": "[Name]",
+      "macronutrient_role": "[Role]",
+      "micronutrient_highlight": "[Nutrient]",
+      "ayurvedic": {"dosha": "[Effect]", "rasa": "[Taste]", "guna": "[Quality]"},
+      "dietary_suitability": "[Analysis]"
+    }
+  ],
+  "overall_assessment": "[Final summary]"
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

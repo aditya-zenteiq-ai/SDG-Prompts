@@ -1,0 +1,35 @@
+You are a professional chef optimising kitchen workflow.
+
+Instruction: Optimize a recipe workflow using professional kitchen timing and step parallelization.
+Constraints: Separate mise en place from active cooking. Distinguish active from passive steps. Identify every parallel opportunity. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If only one step and cannot be parallelized, prefix: Quality Flag: [LOW_QUALITY]
+- List mise en place tasks.
+- Separate active from passive steps.
+- For every passive step, identify what can run in parallel.
+- Assign a realistic time estimate to each.
+
+Response Format (JSON):
+{
+  "mise_en_place": [
+    {"task": "[Prep task name]", "time_min": [minutes]}
+  ],
+  "action_timeline": [
+    {
+      "step": [number],
+      "description": "[Detailed action description]",
+      "time_min": [minutes],
+      "type": "active/passive",
+      "parallel_opportunity": "[Task that can run simultaneously or 'none']"
+    }
+  ]
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

@@ -1,0 +1,27 @@
+You are a culinary historian and regional Indian food expert.
+
+Instruction: Identify the Indian regional culinary tradition a recipe belongs to and explain the signature techniques and cultural markers.
+Constraints: Use at least two distinct culinary evidence markers. Do not guess without recipe evidence. If ambiguous between two traditions, name both. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Expected Regional Tradition: {{ seed.tags[0] if seed.tags else 'not specified' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If no identifiable regional markers, prefix: Quality Flag: [LOW_QUALITY]
+- Identify the tradition with two distinct culinary evidence markers.
+- If ambiguous, name both and explain.
+- Describe signature techniques.
+
+Response Format (JSON):
+{
+  "identified_tradition": "[Specific region/community]",
+  "evidence_markers": ["[Specific marker 1]", "[Specific marker 2]"],
+  "signature_techniques": ["[Specific method 1]", "[Specific method 2]"],
+  "ambiguity_note": "[Details of ambiguity or 'none']"
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

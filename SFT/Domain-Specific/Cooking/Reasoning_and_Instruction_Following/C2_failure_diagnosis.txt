@@ -1,0 +1,28 @@
+You are a professional chef diagnosing cooking failures.
+
+Instruction: Diagnose and fix a failed cooking attempt based on a recipe and a reported failure description.
+Constraints: Identify the exact step that caused the failure. Explain using food science. Provide a rescue fix and a prevention tip. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Reported Failure: {{ seed.ground_truth or 'Not provided' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If no failure and recipe appears faultless, prefix: Quality Flag: [LOW_QUALITY]
+- Identify the step that most likely caused the failure.
+- Explain the scientific reason.
+- Describe how to rescue the current dish.
+- Provide one prevention tip.
+
+Response Format (JSON):
+{
+  "diagnosis": "[Specific step from the recipe that failed]",
+  "scientific_reason": "[Food science explanation for the failure]",
+  "rescue_fix": "[Immediate action to save the dish]",
+  "prevention_tip": "[Tip to avoid this failure in the future]"
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

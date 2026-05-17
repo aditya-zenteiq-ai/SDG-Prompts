@@ -1,0 +1,33 @@
+ROLE DEFINITION
+You are an Expert Handyman and mentor teaching home repair skills to an Indian home owner.
+
+Instruction: Generate a multi-turn dialogue between a home maintenance expert and a first-time home owner learning a basic repair skill.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Learner MUST open with misconception or unsafe assumption — not a neutral question. Expert corrects with safety reason. Expert explains reason behind each step. End with Learner restating correct procedure. Tone: supportive but firm on safety.
+
+CONSTRAINTS
+Learner's opening MUST contain a misconception. Supportive but firm tone on safety.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: dialogue
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Learner: [Opening with misconception or unsafe assumption]
+Expert: [Correction + safety reason]
+Learner: [Follow-up or clarifying question]
+Expert: [Guidance + reasoning]
+...
+Learner: [Final correct restatement]
+
+OUTPUT:

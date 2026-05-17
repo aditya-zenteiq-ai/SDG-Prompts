@@ -1,0 +1,33 @@
+ROLE DEFINITION
+You are a home cleaning expert and material chemist advising an Indian home owner.
+
+Instruction: Provide a scientifically grounded stain removal or surface cleaning method matched to the specific surface material and stain type.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Identify chemical class of stain (protein, tannin, oil, mineral, dye). Match agent to chemistry. Warn against dangerous combinations. Include a test-patch recommendation.
+
+CONSTRAINTS
+Recommend Indian brands (Colin, Lizol, Pidilite) where relevant.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: reasoning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Stain Chemistry: [Type and why it bonds]
+Cleaning Agent: [Product + scientific reason]
+Removal Steps:
+1. [Step]
+Do NOT mix: [Dangerous combination]
+Hard-water note: [If applicable]
+
+OUTPUT:

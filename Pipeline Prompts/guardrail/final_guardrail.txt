@@ -1,0 +1,1 @@
+Llama Guard 4 uses its built-in MLCommons safety classifier; this row is carried for symmetry and is not rendered by final_guardrail_service.

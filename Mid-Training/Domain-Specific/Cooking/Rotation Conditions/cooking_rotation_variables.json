@@ -1,0 +1,576 @@
+{
+    "metadata": {
+        "description": "These are the rotation variables used to augment and diversify the synthetic dataset generation. When a prompt uses variables like dietary restrictions, audiences, or regions, they should be drawn from these lists.",
+        "source": "persona_bundles.py"
+    },
+    "global_variables": {
+        "dietary_restrictions": [
+            "vegan",
+            "gluten-free",
+            "dairy-free",
+            "nut-free",
+            "Jain (no root vegetables, no alliums)",
+            "Sattvic (no onion/garlic)",
+            "Navratri Vrat (fasting / no grains)",
+            "Ayurvedic (Tridoshic / balancing)",
+            "diabetic-friendly",
+            "halal",
+            "keto (desi-style)",
+            "high-protein (vegetarian)",
+            "low-sodium",
+            "low-fat",
+            "paleo",
+            "raw food",
+            "fodmap-friendly",
+            "egg-free",
+            "soy-free",
+            "nightshade-free"
+        ],
+        "audiences": [
+            "beginner home cooks",
+            "experienced home cooks",
+            "professional chefs looking for regional authenticity",
+            "college students with limited equipment",
+            "busy working parents looking for quick meals",
+            "budget-conscious individuals",
+            "culinary school students",
+            "health-conscious athletes",
+            "senior citizens looking for easy recipes",
+            "Indian diaspora recreating hometown flavours abroad",
+            "food bloggers documenting regional Indian cuisine",
+            "nutrition-aware meal preppers",
+            "children learning to cook with supervision",
+            "single professionals cooking for one",
+            "people with physical disabilities needing adapted techniques",
+            "new brides or grooms learning to cook",
+            "parents cooking nutritious meals for toddlers",
+            "retirement-age couples cooking for two",
+            "home bakers exploring Indian sweets",
+            "corporate caterers scaling Indian recipes for events",
+            "yoga and wellness practitioners seeking sattvic meals",
+            "travellers wanting to recreate street food at home",
+            "school children aged 8\u201312 learning to cook with a parent",
+            "teenagers aged 13\u201317 cooking independently for the first time",
+            "college students aged 18\u201322 cooking on a hostel budget",
+            "young professionals aged 23\u201330 meal prepping for the week",
+            "new parents aged 28\u201335 cooking nutritious meals for young children",
+            "middle-aged adults aged 40\u201355 managing diet-related health conditions",
+            "pre-retirement adults aged 55\u201365 rediscovering traditional cooking",
+            "senior citizens aged 65+ cooking for one or two with reduced mobility",
+            "grandparents aged 65+ teaching grandchildren traditional family recipes"
+        ],
+        "serving_scales": [
+            {
+                "from": "1",
+                "to": "2"
+            },
+            {
+                "from": "2",
+                "to": "1"
+            },
+            {
+                "from": "2",
+                "to": "4"
+            },
+            {
+                "from": "2",
+                "to": "6"
+            },
+            {
+                "from": "2",
+                "to": "8"
+            },
+            {
+                "from": "4",
+                "to": "2"
+            },
+            {
+                "from": "4",
+                "to": "8"
+            },
+            {
+                "from": "4",
+                "to": "12"
+            },
+            {
+                "from": "6",
+                "to": "3"
+            },
+            {
+                "from": "6",
+                "to": "2"
+            },
+            {
+                "from": "6",
+                "to": "20"
+            },
+            {
+                "from": "8",
+                "to": "4"
+            },
+            {
+                "from": "8",
+                "to": "24"
+            },
+            {
+                "from": "10",
+                "to": "50"
+            },
+            {
+                "from": "12",
+                "to": "4"
+            },
+            {
+                "from": "3",
+                "to": "5"
+            }
+        ],
+        "languages_out": [
+            "hi",
+            "ta",
+            "te",
+            "ml",
+            "kn",
+            "bn",
+            "mr",
+            "gu",
+            "ur",
+            "as"
+        ],
+        "regions": [
+            "Kerala",
+            "Malabar",
+            "Syrian Christian",
+            "Tamil Nadu",
+            "Chettinad",
+            "Kongunadu",
+            "Karnataka",
+            "Udupi",
+            "Coorg",
+            "Andhra Pradesh",
+            "Telangana",
+            "Hyderabadi",
+            "Punjab",
+            "Awadhi",
+            "Mughlai",
+            "Kashmiri",
+            "Uttar Pradesh",
+            "Bihari",
+            "Bundelkhandi",
+            "Haryanvi",
+            "Rajasthani",
+            "Marwari",
+            "Gujarati",
+            "Kathiyawadi",
+            "Maharashtrian",
+            "Malvani",
+            "Goan",
+            "Sindhi",
+            "Parsi",
+            "Bengali",
+            "Odia",
+            "Assamese",
+            "Manipuri",
+            "Naga",
+            "Kumaoni",
+            "Garhwali"
+        ]
+    },
+    "regional_variables": {
+        "festivals_by_region": {
+            "Kerala": [
+                "Onam",
+                "Vishu",
+                "Christmas",
+                "Eid ul-Fitr",
+                "Thiruvathira"
+            ],
+            "Malabar": [
+                "Eid ul-Fitr",
+                "Eid ul-Adha",
+                "Milad un-Nabi",
+                "Onam"
+            ],
+            "Syrian Christian": [
+                "Christmas",
+                "Easter",
+                "Good Friday",
+                "Onam"
+            ],
+            "Tamil Nadu": [
+                "Pongal",
+                "Navratri",
+                "Diwali",
+                "Karthigai Deepam",
+                "Rama Navami"
+            ],
+            "Chettinad": [
+                "Pongal",
+                "Diwali",
+                "Navratri"
+            ],
+            "Kongunadu": [
+                "Pongal",
+                "Karthigai Deepam",
+                "Diwali"
+            ],
+            "Karnataka": [
+                "Ugadi",
+                "Diwali",
+                "Gowri Habba",
+                "Makara Sankranti"
+            ],
+            "Udupi": [
+                "Diwali",
+                "Mahashivratri",
+                "Ugadi",
+                "Janmashtami"
+            ],
+            "Coorg": [
+                "Puthari",
+                "Kailpodh",
+                "Christmas"
+            ],
+            "Andhra Pradesh": [
+                "Ugadi",
+                "Diwali",
+                "Sankranti",
+                "Rama Navami"
+            ],
+            "Telangana": [
+                "Bathukamma",
+                "Eid ul-Fitr",
+                "Bonalu",
+                "Sankranti"
+            ],
+            "Hyderabadi": [
+                "Eid ul-Fitr",
+                "Eid ul-Adha",
+                "Milad un-Nabi",
+                "Diwali"
+            ],
+            "Punjab": [
+                "Baisakhi",
+                "Lohri",
+                "Diwali",
+                "Eid ul-Fitr",
+                "Guru Nanak Jayanti"
+            ],
+            "Awadhi": [
+                "Eid ul-Fitr",
+                "Eid ul-Adha",
+                "Diwali",
+                "Holi"
+            ],
+            "Mughlai": [
+                "Eid ul-Fitr",
+                "Eid ul-Adha",
+                "Milad un-Nabi"
+            ],
+            "Kashmiri": [
+                "Eid ul-Fitr",
+                "Eid ul-Adha",
+                "Navreh"
+            ],
+            "Uttar Pradesh": [
+                "Navratri",
+                "Diwali",
+                "Holi",
+                "Eid ul-Fitr",
+                "Makar Sankranti",
+                "Ram Navami"
+            ],
+            "Bihari": [
+                "Chhath Puja",
+                "Holi",
+                "Diwali",
+                "Teej"
+            ],
+            "Bundelkhandi": [
+                "Diwali",
+                "Holi",
+                "Navratri"
+            ],
+            "Haryanvi": [
+                "Baisakhi",
+                "Lohri",
+                "Diwali",
+                "Holi"
+            ],
+            "Rajasthani": [
+                "Diwali",
+                "Holi",
+                "Teej",
+                "Gangaur",
+                "Navratri"
+            ],
+            "Marwari": [
+                "Diwali",
+                "Teej",
+                "Mahavir Jayanti",
+                "Paryushan"
+            ],
+            "Gujarati": [
+                "Diwali",
+                "Janmashtami",
+                "Paryushan",
+                "Navratri",
+                "Makar Sankranti",
+                "Uttarayan"
+            ],
+            "Kathiyawadi": [
+                "Diwali",
+                "Navratri",
+                "Uttarayan"
+            ],
+            "Maharashtrian": [
+                "Ganesh Chaturthi",
+                "Diwali",
+                "Gudi Padwa",
+                "Makar Sankranti",
+                "Holi"
+            ],
+            "Malvani": [
+                "Ganesh Chaturthi",
+                "Diwali",
+                "Christmas"
+            ],
+            "Goan": [
+                "Christmas",
+                "Easter",
+                "Good Friday",
+                "Ganesh Chaturthi"
+            ],
+            "Sindhi": [
+                "Cheti Chand",
+                "Diwali",
+                "Holi"
+            ],
+            "Parsi": [
+                "Parsi New Year (Navroz)",
+                "Pateti"
+            ],
+            "Bengali": [
+                "Durga Puja",
+                "Kali Puja",
+                "Saraswati Puja",
+                "Bhai Phota",
+                "Poila Boishakh"
+            ],
+            "Odia": [
+                "Rath Yatra",
+                "Raja Parba",
+                "Diwali",
+                "Nuakhai"
+            ],
+            "Assamese": [
+                "Bihu",
+                "Durga Puja",
+                "Christmas"
+            ],
+            "Manipuri": [
+                "Yaoshang",
+                "Ningol Chakouba",
+                "Christmas"
+            ],
+            "Naga": [
+                "Christmas",
+                "Hornbill Festival"
+            ],
+            "Kumaoni": [
+                "Holi",
+                "Diwali",
+                "Makar Sankranti",
+                "Phool Dei"
+            ],
+            "Garhwali": [
+                "Holi",
+                "Diwali",
+                "Basant Panchami"
+            ]
+        },
+        "preservation_methods_by_region": {
+            "Kerala": [
+                "lacto-fermentation",
+                "oil immersion",
+                "sun-drying",
+                "brining"
+            ],
+            "Malabar": [
+                "oil immersion",
+                "sun-drying",
+                "salt-curing"
+            ],
+            "Syrian Christian": [
+                "vinegar preservation",
+                "brining",
+                "salt-curing"
+            ],
+            "Tamil Nadu": [
+                "sun-drying",
+                "pickling",
+                "lacto-fermentation",
+                "jaggery or sugar preserving"
+            ],
+            "Chettinad": [
+                "sun-drying",
+                "pickling",
+                "salt-curing"
+            ],
+            "Kongunadu": [
+                "sun-drying",
+                "lacto-fermentation"
+            ],
+            "Karnataka": [
+                "lacto-fermentation",
+                "oil immersion",
+                "sun-drying"
+            ],
+            "Udupi": [
+                "oil immersion",
+                "lacto-fermentation"
+            ],
+            "Coorg": [
+                "smoking",
+                "brining",
+                "vinegar preservation"
+            ],
+            "Andhra Pradesh": [
+                "pickling",
+                "sun-drying",
+                "lacto-fermentation",
+                "oil immersion"
+            ],
+            "Telangana": [
+                "pickling",
+                "sun-drying",
+                "brining"
+            ],
+            "Hyderabadi": [
+                "brining",
+                "salt-curing",
+                "refrigeration"
+            ],
+            "Punjab": [
+                "salt-curing",
+                "brining",
+                "smoking",
+                "refrigeration"
+            ],
+            "Awadhi": [
+                "brining",
+                "salt-curing",
+                "refrigeration"
+            ],
+            "Mughlai": [
+                "salt-curing",
+                "smoking",
+                "refrigeration"
+            ],
+            "Kashmiri": [
+                "salt-curing",
+                "smoking",
+                "sun-drying"
+            ],
+            "Uttar Pradesh": [
+                "sun-drying",
+                "jaggery or sugar preserving",
+                "pickling"
+            ],
+            "Bihari": [
+                "sun-drying",
+                "pickling",
+                "lacto-fermentation"
+            ],
+            "Bundelkhandi": [
+                "sun-drying",
+                "pickling"
+            ],
+            "Haryanvi": [
+                "refrigeration",
+                "sun-drying",
+                "brining"
+            ],
+            "Rajasthani": [
+                "sun-drying",
+                "vacuum sealing",
+                "jaggery or sugar preserving",
+                "salt-curing"
+            ],
+            "Marwari": [
+                "sun-drying",
+                "vacuum sealing"
+            ],
+            "Gujarati": [
+                "pickling",
+                "sun-drying",
+                "jaggery or sugar preserving",
+                "oil immersion"
+            ],
+            "Kathiyawadi": [
+                "sun-drying",
+                "pickling",
+                "jaggery or sugar preserving"
+            ],
+            "Maharashtrian": [
+                "lacto-fermentation",
+                "sun-drying",
+                "pickling",
+                "freezing"
+            ],
+            "Malvani": [
+                "oil immersion",
+                "brining",
+                "sun-drying"
+            ],
+            "Goan": [
+                "vinegar preservation",
+                "smoking",
+                "brining"
+            ],
+            "Sindhi": [
+                "pickling",
+                "sun-drying",
+                "salt-curing"
+            ],
+            "Parsi": [
+                "vinegar preservation",
+                "brining",
+                "salt-curing"
+            ],
+            "Bengali": [
+                "lacto-fermentation",
+                "sun-drying",
+                "jaggery or sugar preserving",
+                "brining"
+            ],
+            "Odia": [
+                "sun-drying",
+                "lacto-fermentation"
+            ],
+            "Assamese": [
+                "lacto-fermentation",
+                "smoking",
+                "sun-drying",
+                "brining"
+            ],
+            "Manipuri": [
+                "lacto-fermentation",
+                "sun-drying"
+            ],
+            "Naga": [
+                "smoking",
+                "lacto-fermentation",
+                "salt-curing"
+            ],
+            "Kumaoni": [
+                "sun-drying",
+                "lacto-fermentation"
+            ],
+            "Garhwali": [
+                "sun-drying",
+                "lacto-fermentation"
+            ]
+        }
+    }
+}

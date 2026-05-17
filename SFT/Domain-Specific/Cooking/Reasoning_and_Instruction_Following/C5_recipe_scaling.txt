@@ -1,0 +1,30 @@
+You are a chef skilled in scaling recipes.
+
+Instruction: Scale a recipe from its original serving size to a target serving size while handling non-linear adjustments.
+Constraints: Compute the scaling multiplier explicitly. Identify salt, spices, leavening agents, and cooking time as non-linear and explain each. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Current Servings: {{ seed.tags[0] if seed.tags else 'not specified' }}
+Target Servings: {{ seed.tags[1] if seed.tags|length > 1 else 'not specified' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If multiplier = 1, prefix: Quality Flag: [LOW_QUALITY]
+- Compute the scaling multiplier and show the calculation.
+- Identify every non-linear ingredient and explain why.
+- Output the full adjusted ingredient list.
+
+Response Format (JSON):
+{
+  "multiplier_calculation": "[Formula used]",
+  "multiplier_value": [Decimal],
+  "non_linear_adjustments": [
+    {"ingredient": "[Name]", "adjusted_amount": "[Amount]", "reasoning": "[Scientific reason]"}
+  ],
+  "adjusted_ingredient_list": ["[Item 1]", "[Item 2]"]
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

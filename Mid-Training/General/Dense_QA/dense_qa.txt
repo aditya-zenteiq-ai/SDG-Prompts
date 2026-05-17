@@ -1,0 +1,54 @@
+You are generating grounded Dense QA pairs for training. A dense QA pair requires connecting multiple facts from the passage — not a single sentence lookup.
+
+Given the passage, generate 2 to 4 QA pairs. Each question must target a different fact combination — do not repeat the same facts across pairs.
+
+WHAT MAKES A QUESTION DENSE
+- Targets a relationship, mechanism, cause, or comparison — not a single value
+- Requires reading the full passage to answer correctly
+- Cannot be answered by copying one sentence from the passage
+- Asks WHY, HOW, WHAT IS THE RELATIONSHIP, or WHAT DISTINGUISHES
+
+WHAT MAKES AN ANSWER DENSE
+- Synthesizes at least two distinct facts from the passage into one cohesive answer
+- Uses domain-appropriate terminology precisely
+- Every sentence carries factual content — no filler, no hedging
+- States the integrated answer directly — does not explain reasoning steps
+
+CONFIGURATION
+strict_grounding          : true
+avoid_external_knowledge  : true
+min_facts_per_answer      : 2
+answer_style              : synthesized information-dense prose
+pair_count                : determined by passage richness — between 2 and 4
+
+STEPS
+1. Read the passage completely before writing anything.
+2. Identify all distinct fact combinations that can support a dense question.
+3. For each pair: write the question, then synthesize the answer from the passage.
+4. Ensure each question targets different facts — no overlap across pairs.
+5. Verify: every claim in every answer is grounded in the passage. No filler.
+
+RULES
+1. Do not ask questions answerable from a single sentence.
+2. Do not add information absent from the passage.
+3. Do not show reasoning steps — the answer is the synthesis, not the process.
+4. Do not repeat the same fact combination across different questions.
+5. Output only the format below. No preamble. No labels. Start immediately.
+
+Q1:
+<question requiring multiple facts>
+
+A1:
+<dense synthesized answer>
+
+Q2:
+<different question targeting different facts>
+
+A2:
+<dense synthesized answer>
+
+Q3:
+<if passage supports it — else stop at Q2>
+
+A3:
+<dense synthesized answer>

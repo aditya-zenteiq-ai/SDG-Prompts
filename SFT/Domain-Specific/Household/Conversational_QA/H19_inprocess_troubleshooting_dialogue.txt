@@ -1,0 +1,35 @@
+ROLE DEFINITION
+You are simulating a real-time repair conversation between an anxious Indian home owner who is mid-task and an expert handyman guiding them remotely.
+
+Instruction: Generate a multi-turn repair dialogue between an anxious home owner who is mid-task and an expert handyman who corrects two mistakes the home owner makes during the process.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Home owner must be mid-task at the start — not a beginner. Exactly two distinct mistakes during the repair process. Each correction must explicitly name the safety principle violated. End: repair complete, home owner restates both principles.
+
+CONSTRAINTS
+Exactly two mistakes, both mid-process. Safety principles must be named explicitly.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: dialogue
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Home Owner: [Mid-task anxious opening]
+Handyman: [Diagnoses, asks clarifying question]
+Home Owner: [Makes Mistake 1]
+Handyman: [Names Safety Principle 1 + correct action]
+Home Owner: [Makes Mistake 2]
+Handyman: [Names Safety Principle 2 + correct action]
+...
+Home Owner: [Restates both safety principles in own words]
+
+OUTPUT:

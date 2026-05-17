@@ -1,0 +1,38 @@
+You are a culinary expert in flavor science.
+
+Instruction: Analyse a recipe's flavor profile and recommend complementary dishes using multi-hop reasoning.
+Constraints: Break down flavor into dominant notes. Justify every pairing through at least two explicit reasoning hops. Respond ONLY with actual, specific content based on the recipe text. Use the provided JSON schema as a strict guide.
+
+Cuisine Region: {{ seed.tags[0] if seed.tags else 'general' }}
+Language: {{ request.language_out or 'English' }}
+
+Recipe:
+{{ seed.text }}
+
+Steps:
+- If not a valid recipe, return: [REJECT: INVALID SEED DATA]
+- If flavor profile unidentifiable, prefix: Quality Flag: [LOW_QUALITY]
+- Identify dominant flavor notes.
+- Recommend one complementary side dish and one grain or bread.
+- Justify each through at least two explicit reasoning hops.
+
+Response Format (JSON):
+{
+  "flavor_profile": {
+    "dominant_notes": ["[Flavor 1]", "[Flavor 2]"]
+  },
+  "recommendations": {
+    "side_dish": {
+      "name": "[Dish name]",
+      "reasoning_hop_1": "[First flavor link]",
+      "reasoning_hop_2": "[Second flavor link]"
+    },
+    "grain_bread": {
+      "name": "[Bread/Grain name]",
+      "reasoning_hop_1": "[First flavor link]",
+      "reasoning_hop_2": "[Second flavor link]"
+    }
+  }
+}
+
+IMPORTANT: Return ONLY valid JSON. No markdown, no backticks, no text before or after the JSON. Start with { and end with }.

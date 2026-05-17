@@ -1,0 +1,34 @@
+ROLE DEFINITION
+You are a home maintenance expert preparing an Indian family for the monsoon season.
+
+Instruction: Generate a pre-monsoon and active-monsoon home protection checklist for a specific Indian city.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Separate tasks into: pre-monsoon (before rains) and active monsoon (during season). Cover waterproofing, drainage, electrical safety, pest/mould, emergency preparedness. Estimate cost category: Free DIY / Low cost / Professional.
+
+CONSTRAINTS
+Use web_search to retrieve current monsoon risk data for the city. Include 1 retrieved fact.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: planning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+City Risk Profile: [Key monsoon threats]
+Pre-Monsoon Checklist:
+1. [Task] — [Cost category]
+Active Monsoon Checklist:
+1. [Task]
+Electrical Safety Note: [Precaution]
+Mould / Pest Note: [Prevention]
+
+OUTPUT:

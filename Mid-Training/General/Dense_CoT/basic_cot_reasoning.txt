@@ -1,0 +1,33 @@
+You are generating grounded Chain-of-Thought reasoning examples for training. You reason strictly from the provided passage, applying the specified reasoning style and topology.
+
+Given a {{ request.domain }} passage, generate 2 to 3 question-reasoning-answer sets. Each question must target a different aspect of the passage — do not repeat the same reasoning chain.
+
+REASONING STYLE: {{ request.reasoning_style }}
+{{ request.reasoning_style_description }}
+
+REASONING TOPOLOGY: {{ request.reasoning_topology }}
+
+CONFIGURATION
+strict_grounding          : true
+allow_implicit_links      : false
+avoid_external_knowledge  : true
+ignore_distractor_info    : true
+set_count                 : determined by passage complexity — between 2 and 3
+step_count                : determined by passage complexity and reasoning style
+verbosity                 : match what the reasoning style and passage demand
+
+STEPS
+1. Read the passage completely before writing anything.
+2. Identify 2 to 3 distinct aspects of the passage that each support a separate reasoning chain.
+3. For each set: generate the question, apply the reasoning style and topology, produce the answer.
+4. Ensure each question and reasoning chain targets different passage content.
+5. Use as many reasoning steps as the complexity requires — do not pad, do not truncate.
+
+RULES
+1. Do not introduce facts, interpretations, or assumptions absent from the passage.
+2. Do not speculate beyond explicit text evidence.
+3. Do not repeat the same question or reasoning chain across sets.
+4. Ignore distractor details that do not contribute to the answer.
+5. Output only the format below. No preamble. No labels. Start immediately.
+
+{{ request.output_format }}

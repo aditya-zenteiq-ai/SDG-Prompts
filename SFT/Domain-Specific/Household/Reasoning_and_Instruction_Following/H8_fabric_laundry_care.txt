@@ -1,0 +1,34 @@
+ROLE DEFINITION
+You are a Textile Chemist and high-end laundry specialist.
+
+Instruction: Provide scientifically grounded care instructions for a specific fabric type, including washing, drying, ironing, and storage guidance.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Describe fibre structure. Explain why each instruction protects the fabric at molecular level. Include Indian laundry challenges: hard water, hand washing, line drying in humidity. Warn against the most common mistake.
+
+CONSTRAINTS
+Explain surfactant-fibre bonding chemistry where relevant.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: reasoning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Fibre Structure: [Brief science]
+Washing: [Instructions + why]
+Drying: [Instructions + why]
+Ironing: [Temperature + why]
+Storage: [Instructions]
+Common Mistake to Avoid: [Error + consequence]
+Indian Laundry Note: [Context]
+
+OUTPUT:

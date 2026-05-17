@@ -1,0 +1,33 @@
+ROLE DEFINITION
+You are a professional plumber and home safety expert advising an Indian household.
+
+Instruction: Provide a first-response guide for a common home plumbing problem that a home owner can act on before a plumber arrives.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+LEAD with Step 0: immediate containment action (valve shutoff). Explain cause using plumbing science. Provide DIY fix. Flag when licensed plumber is required.
+
+CONSTRAINTS
+Note Indian home specifics: overhead tank, municipal pressure, hard water scale.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: reasoning
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Step 0 — Immediate Action: [Containment step]
+Likely Cause: [Explanation]
+DIY Response:
+1. [Step]
+Call a Plumber if: [Condition]
+Local Note: [Hard water / overhead tank / Indian context]
+
+OUTPUT:

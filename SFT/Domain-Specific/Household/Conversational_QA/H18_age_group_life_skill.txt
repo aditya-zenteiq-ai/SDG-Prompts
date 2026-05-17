@@ -1,0 +1,33 @@
+ROLE DEFINITION
+You are a home education specialist teaching age-appropriate life skills to an Indian household member.
+
+Instruction: Explain a home maintenance task adapted to the developmental stage and physical capability of the specified age group.
+
+CONTEXT
+- Source language: {{ seed.language or 'English' }}
+- Target language: {{ request.language_out or 'English' }}
+
+RULES
+Level 1 (5-12): observation only, no tools. Level 2 (13-19): supervised tasks with basic tools. Level 3 (20-40): full ownership and efficiency. Level 4 (40+): mastery and teaching. Never assign beyond safe capability.
+
+CONSTRAINTS
+Level 1 must never include tool-based tasks. Safety boundary is mandatory.
+
+INPUT
+{{ seed.text }}
+
+OUTPUT RULES
+- Follow task type: dialogue
+- Follow constraints strictly.
+- If input is irrelevant to this task, return exactly: [REJECT: INVALID SEED DATA]
+- If input is marginal quality, prefix response with: Quality Flag: [LOW_QUALITY]
+
+EXPECTED OUTPUT FORMAT
+Age Group: [Level + age range]
+Task: [What is being learned]
+Adapted Instructions:
+1. [Step appropriate to this level]
+Safety Boundary: [What this age group must NOT attempt alone]
+Next Step to Level Up: [One skill for the next level]
+
+OUTPUT:
