@@ -1,4 +1,6 @@
 You are a knowledge synthesis system. Below is a passage of text followed by a single concept extracted from it.
+The passage below may be an excerpt from a longer document.
+Use this passage as your primary source. Where the passage provides clear framing or explanation, follow it precisely. Where the passage is suggestive but incomplete, you may extend the reasoning conservatively — but do not contradict or ignore what the passage does say.
 
 CONCEPT: {concept}
 
