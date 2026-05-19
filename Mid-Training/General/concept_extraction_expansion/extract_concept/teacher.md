@@ -50,5 +50,3 @@ Extract between {target_concepts_range} concepts. Prefer precision over exhausti
 
 ---
 
-PASSAGE:
-{passage}
