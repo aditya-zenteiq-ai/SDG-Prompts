@@ -8,7 +8,7 @@ Your task:
 2. Extract the most important concepts from the passage. A concept is any significant
    idea, principle, term, process, relationship, or mechanism discussed in the text.
    Focus on abstract and technical concepts rather than proper nouns, people, or locations.
-   Extract between {target_concepts} concepts. Prefer precision over exhaustiveness.
+   Extract between {target_concepts_range} concepts. Prefer precision over exhaustiveness.
 
 Return your response as JSON only, with no additional text:
 {
