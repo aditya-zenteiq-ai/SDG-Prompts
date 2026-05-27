@@ -8,67 +8,53 @@ from datetime import datetime
 # ─────────────────────────────────────────────
 # CONFIGURE THESE BEFORE RUNNING
 # ─────────────────────────────────────────────
-SEED_FILE_PATH = "seeds.txt"          # Path to text file with one seed_id per row
+SEED_FILE_PATH = "/home/sushmetha/aditya/seed_ids/medicine_seed_ids.txt"          # Path to text file with one seed_id per row
 DOMAIN = "Medicine"                    # Domain name for this run
-CONCURRENCY = 1                        # Number of concurrent threads
-SLEEP_BETWEEN_REQUESTS = 120          # Seconds to sleep between spawning each thread
-OUTPUT_CSV = "runs_output.csv"        # Output CSV file path
+CONCURRENCY = 32                        # Number of concurrent threads
+SLEEP_BETWEEN_REQUESTS = 120           # Seconds to sleep between batches
+OUTPUT_CSV = f"/home/sushmetha/aditya/concept_extraction_csvs/old_mehul_chunks/{DOMAIN}_output.csv"         # Output CSV file path
+"""
+OUTPUT COLS ARE  : run_id,seed_id,domain,target_concepts_range,status,timestamp
+"""
 # ─────────────────────────────────────────────
 
 BASE_URL = "http://34.14.214.233:8000/api/v1"
-PROMPT_TEMPLATE_ID = "2eb9a3df-ae3f-4d3d-87d5-17f33e703cd9"
+PROMPT_TEMPLATE_ID = "0e1ff9aa-22a1-4134-bb30-03a4f62ce873"
 
 DOMAIN_RANGE_MAP = {
-    "Medicine":        "6-9",
-    "Law":             "6-9",
-    "Mental Health":   "6-9",
-    "Diets":           "5-8",
-    "Indian_Cooking":  "5-8",
-    "Cooking":         "5-8",
-    "Astrology":       "5-7",
-    "Household":       "4-7",
-    "first_aid":       "5-8",
-    "Humour":          "4-6",
-    "Multilingual":    "5-7",
+    "Medicine":        "1-20",
+    "Law":             "1-20",
+    "Mental Health":   "1-20",
+    "Diets":           "1-15",
+    "Indian_Cooking":  "1-15",
+    "Cooking":         "1-15",
+    "Astrology":       "1-15",
+    "Household":       "1-20",
+    "first_aid":       "1-20",
+    "Humour":          "1-15",
 }
 
 csv_lock = threading.Lock()
 
 
-def get_target_range(domain: str) -> str:
+def get_target_range(domain):
     if domain not in DOMAIN_RANGE_MAP:
         raise ValueError(f"Domain '{domain}' not found in DOMAIN_RANGE_MAP. Please add it.")
     return DOMAIN_RANGE_MAP[domain]
 
 
-def create_run(seed_id: str, domain: str, target_range: str) -> str | None:
+def create_run(seed_id, domain, target_range):
     """Creates a run and returns run_id, or None on failure."""
     payload = {
         "seed_data_id": seed_id,
         "task_type": "concept_extraction",
         "is_thinking": False,
         "prompt_template_ids": [
-            {
-                "type": "teacher_a",
-                "prompt_id": PROMPT_TEMPLATE_ID,
-                "model": "deepseek"
-            },
-            {
-                "type": "auditor",
-                "model": "qwen3_32b"
-            },
-            {
-                "type": "dean",
-                "model": "Qwen/Qwen3.5-122B-A10B"
-            },
-            {
-                "type": "tool_verifier",
-                "model": "gemma4"
-            },
-            {
-                "type": "final_guardrail",
-                "model": "qwen3_guard"
-            }
+            {"type": "teacher_a", "prompt_id": PROMPT_TEMPLATE_ID, "model": "deepseek-ai/DeepSeek-V3.1"},
+            {"type": "auditor", "model": "Qwen/Qwen3-32B"},
+            {"type": "dean", "model": "Qwen/Qwen3.5-122B-A10B"},
+            {"type": "tool_verifier", "model": "Qwen/Qwen3-32B"},
+            {"type": "final_guardrail", "model": "Qwen/Qwen3Guard-Gen-8B"}
         ],
         "custom_vars": {
             "request": {
@@ -85,6 +71,7 @@ def create_run(seed_id: str, domain: str, target_range: str) -> str | None:
             data=json.dumps(payload),
             timeout=30
         )
+        print(f"[DEBUG] Create run response [{response.status_code}]: {response.text}")
         response.raise_for_status()
         data = response.json()
         run_id = data.get("run_id")
@@ -96,13 +83,14 @@ def create_run(seed_id: str, domain: str, target_range: str) -> str | None:
         return None
 
 
-def start_run(run_id: str) -> bool:
+def start_run(run_id):
     """Starts a run. Returns True if successful."""
     try:
         response = requests.post(
             f"{BASE_URL}/runs/{run_id}/start",
             timeout=30
         )
+        print(f"[DEBUG] Start run response [{response.status_code}]: {response.text}")
         response.raise_for_status()
         return True
     except Exception as e:
@@ -110,7 +98,7 @@ def start_run(run_id: str) -> bool:
         return False
 
 
-def write_csv_row(row: dict):
+def write_csv_row(row):
     """Thread-safe CSV row writer."""
     with csv_lock:
         with open(OUTPUT_CSV, "a", newline="") as f:
@@ -120,8 +108,8 @@ def write_csv_row(row: dict):
             writer.writerow(row)
 
 
-def process_seed(seed_id: str, domain: str, target_range: str):
-    """Full pipeline for one seed: create run → start run → log result."""
+def process_seed(seed_id, domain, target_range):
+    """Full pipeline for one seed: create run -> start run -> log result."""
     print(f"[INFO] Processing seed: {seed_id}")
 
     run_id = create_run(seed_id, domain, target_range)
@@ -153,7 +141,7 @@ def process_seed(seed_id: str, domain: str, target_range: str):
 
 
 def init_csv():
-    """Create CSV with headers if it doesn't exist."""
+    """Create CSV with headers."""
     with open(OUTPUT_CSV, "w", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=[
             "run_id", "seed_id", "domain", "target_concepts_range", "status", "timestamp"
@@ -161,13 +149,13 @@ def init_csv():
         writer.writeheader()
 
 
-def load_seeds(filepath: str) -> list[str]:
+def load_seeds(filepath):
     with open(filepath, "r") as f:
         seeds = [line.strip() for line in f if line.strip()]
     return seeds
 
 
-def process_batch(batch: list[str], domain: str, target_range: str, batch_num: int):
+def process_batch(batch, domain, target_range, batch_num):
     """Spawn one thread per seed in the batch, wait for all to finish."""
     print(f"[INFO] Batch {batch_num} — processing {len(batch)} seeds concurrently")
     threads = []
@@ -200,7 +188,6 @@ def main():
 
     init_csv()
 
-    # Split seeds into batches of size CONCURRENCY
     batches = [seeds[i:i + CONCURRENCY] for i in range(0, len(seeds), CONCURRENCY)]
     total_batches = len(batches)
     print(f"[INFO] Total batches : {total_batches}")
