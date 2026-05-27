@@ -1,0 +1,60 @@
+{
+    "concept_type_vs_format": [
+        [
+            "mechanism",
+            "myth_vs_fact"
+        ],
+        [
+            "mechanism",
+            "reference_entry"
+        ],
+        [
+            "phenomenon",
+            "myth_vs_fact"
+        ],
+        [
+            "phenomenon",
+            "reference_entry"
+        ],
+        [
+            "phenomenon",
+            "tutorial"
+        ]
+    ],
+    "concept_type_vs_angle": [
+        [
+            "mechanism",
+            "historical"
+        ],
+        [
+            "phenomenon",
+            "historical"
+        ],
+        [
+            "principle",
+            "historical"
+        ],
+        [
+            "relationship",
+            "historical"
+        ],
+        [
+            "technique",
+            "historical"
+        ]
+    ],
+    "concept_type_vs_operation": [
+        [
+            "phenomenon",
+            "troubleshoot"
+        ],
+        [
+            "principle",
+            "troubleshoot"
+        ],
+        [
+            "relationship",
+            "troubleshoot"
+        ]
+    ]
+}
